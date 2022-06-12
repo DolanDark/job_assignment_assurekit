@@ -129,4 +129,4 @@ from data_blueprint import data
 app.register_blueprint(data, url_prefix="/")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 7777)), debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8888)), debug=True)
