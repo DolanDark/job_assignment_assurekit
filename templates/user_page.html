@@ -1,22 +1,31 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
     %}
-    <h1 align="center">HEllo, you are currently logged in userr</h1>
-    <!-- <ul class="list-group list-group-flush" id="notes">
-      {% for note in user.notes %}
-      <li class="list-group-item">
-        {{ note.data }}
-        <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </li>
-      {% endfor %}
-    </ul> -->
-    <!-- <form method="POST">
-      <textarea name="note" id="note" class="form-control"></textarea>
-      <br />
-      <div align="center">
-        <button type="submit" class="btn btn-primary">Add Note</button>
+    <h1 align="center">Hi {{output | safe}}, you are currently logged in  </h1>
+    <br>
+    <br>
+    <h3 align="center">Your userid from the DB is {{output_uid | safe}}</h3>
+    <h3 align="center">Date created on</h3>
+    <br>
+    <br>
+    <form action="/admin_page_access" method="post">
+      <div class="text-center">
+      <button class="btn btn-primary" name="forwardBtn" type="submit">Check admin access</button>
+    </form>
+
+    <!-- <form method="POST" enctype="multipart/form-data">
+      <div>
+      <br>
+      <div class="text-center">
+          <button class="btn btn-primary" type="button">Check admin access</button>
       </div>
-    </form> -->
+      </div>
+      <br>
+      <br>
+      <div align="center">
+          <label> {{output | safe}} </label>
+      </div>
+      <br>
+      <br>
+  </form> -->
     {% endblock %}
     

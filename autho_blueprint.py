@@ -83,10 +83,3 @@ def logout():
 def info():
     return render_template("info.html", user="temp")
 
-# @autho.route('/', methods=['GET', 'POST'])
-# def home():
-#     if request.method == 'POST':
-#         print("----------------")
-#         print(session['user'])
-
-#     return render_template("home.html", user=session['user'])

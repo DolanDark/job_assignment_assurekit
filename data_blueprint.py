@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, flash, redirect, url_for
 from app import db
+from flask_login import current_user
 
 data = Blueprint("data_blueprint",__name__)
 print("admindata_blueprint executed")
@@ -8,19 +9,33 @@ print("admindata_blueprint executed")
 @data.route("/user_page", methods=['GET','POST'])
 def user_page(*args, **kwargs):
 
-    # email
-    # chk_admin = db.execute("SELECT userid FROM assurekit_users WHERE email=%s", (email,))
-    return render_template("home.html", user="logged_in")
+    try:
+        email = session['user']
+    except Exception as err:
+        print(err)
+        return redirect(url_for('autho.login'))
+
+    chk_user = db.execute("SELECT username,userid FROM assurekit_users WHERE email=%s", (email,))
+    print(chk_user)
+    return render_template("user_page.html", user="logged_in", output = chk_user[0], output_uid = chk_user[1])
 
 
-@data.route("/admin_page",methods=['GET', 'POST'])
-def admin_page(*args, **kwargs):
+@data.route("/admin_page_access", methods=['GET','POST'])
+def admin_page_access(*args, **kwargs):
 
-    email = session['user']
-    chk_admin = db.execute("SELECT isadmin FROM assurekit_users WHERE email=%s", (email,))
+    try:
+        email = session['user']
+    except Exception as err:
+        print(err)
+        return redirect(url_for('autho.login'))
 
-    if chk_admin == True:
-        data = db.query_db("SELECT username,email,isadmin FROM public.userdb")
-        return jsonify({"users": data})
+    chk_admin = db.execute("SELECT isadmin, username FROM assurekit_users WHERE email=%s", (email,))
+    print(chk_admin[0])
+
+    if chk_admin[0]:
+        # chk_admin = db.execute("SELECT isadmin FROM assurekit_users WHERE email=%s", (email,))
+        flash('Welcome admin', category='success')
+        return render_template("admin_page.html", user="logged_in")
     else:
-        return jsonify({"Message": "User has no permissions."})
+        flash(f'Sorry {chk_admin[1]}, you do not have admin access.', category='error')
+        return redirect(url_for('data_blueprint.user_page'))
