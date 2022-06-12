@@ -17,8 +17,10 @@ def user_page(*args, **kwargs):
 
     chk_user = db.execute("SELECT username,userid,created_on FROM assurekit_users WHERE email=%s", (email,))
     # print(chk_user)
-    real_time = datetime.datetime.fromtimestamp(chk_user[2]).strftime('%H:%M %d-%m-%Y')
-    return render_template("user_page.html", user="logged_in", output = chk_user[0], output_uid = chk_user[1], output_date = real_time)
+    # real_time = datetime.datetime.fromtimestamp(chk_user[2]).strftime('%H:%M %d-%m-%Y')
+    tz = datetime.timezone(+datetime.timedelta(hours=5,minutes=30))
+    local_time= datetime.datetime.fromtimestamp(chk_user[2], tz).strftime('%d-%m-%Y %H:%M:%S ')
+    return render_template("user_page.html", user="logged_in", output = chk_user[0], output_uid = chk_user[1], output_date = local_time)
 
 
 @data.route("/admin_page_access", methods=['GET','POST'])
