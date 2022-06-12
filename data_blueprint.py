@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, session, flash, redirect, url_for
 from app import db
-from flask_login import current_user
 import datetime
 
 data = Blueprint("data_blueprint",__name__)
