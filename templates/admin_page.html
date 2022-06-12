@@ -3,4 +3,24 @@
     <h1 align="center">Hey, you are on the admin page</h1>
     <br>
     <h3 align="center">You can find all information in the database here below</h2>
+    <br>
+    <br>
+        <div align="center">
+        <table class="table center">
+            <thead class="thead-dark">
+                <tr>
+                  <th scope="col">Username</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Admin_access</th>
+                </tr>
+              </thead>
+            {% for item in items %}
+            <TR>
+               <TD class="c1">{{item.username}}</TD>
+               <TD class="c2">{{item.email}}</TD>
+               <TD class="c3"><SPAN>{{item.isadmin}}</SPAN></TD>
+            </TR>
+            {% endfor %}
+            </table>
+        </div>
     {% endblock %}

@@ -4,28 +4,13 @@
     <br>
     <br>
     <h3 align="center">Your userid from the DB is {{output_uid | safe}}</h3>
-    <h3 align="center">Date created on</h3>
+    <br>
+    <h4 align="center">Account created on {{output_date | safe}}</h3>
     <br>
     <br>
     <form action="/admin_page_access" method="post">
       <div class="text-center">
       <button class="btn btn-primary" name="forwardBtn" type="submit">Check admin access</button>
     </form>
-
-    <!-- <form method="POST" enctype="multipart/form-data">
-      <div>
-      <br>
-      <div class="text-center">
-          <button class="btn btn-primary" type="button">Check admin access</button>
-      </div>
-      </div>
-      <br>
-      <br>
-      <div align="center">
-          <label> {{output | safe}} </label>
-      </div>
-      <br>
-      <br>
-  </form> -->
     {% endblock %}
     

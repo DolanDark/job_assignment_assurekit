@@ -11,14 +11,13 @@ import psycopg2
 from psycopg2 import pool
 
 app = Flask(__name__)
-app.secret_key = 'secretval'
+app.secret_key = '5w3v5cu42gs6g7tf'
 
-key = os.environ.get('JWT_SECRET', '2iz45w3v5cu42gvypjj5')
-int_code = os.environ.get('INTERNAL_CODE', '1234')
-
+# key = os.environ.get('JWT_SECRET', '2iz45w3v5cu42gvypjj5')
+# int_code = os.environ.get('INTERNAL_CODE', '1234')
 # app.config["JWT_SECRET_KEY"] = key
 # app.config["JWT_ACCESS_TOKEN_EXPIRES"] = datetime.timedelta(days=10)
-jwt = JWTManager(app)
+# jwt = JWTManager(app)
 
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -130,4 +129,4 @@ from data_blueprint import data
 app.register_blueprint(data, url_prefix="/")
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8787)), debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 7777)), debug=True)

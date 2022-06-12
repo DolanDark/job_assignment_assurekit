@@ -1,4 +1,5 @@
 import pyrebase
+import datetime
 from flask import Blueprint, render_template, request, flash, session, redirect, url_for
 
 autho = Blueprint("autho", __name__)
@@ -65,7 +66,8 @@ def sign_up():
         else:
             new_user = auth.create_user_with_email_and_password(email, password1)
             uid = new_user['localId']
-            new_user_query = db.run("INSERT INTO assurekit_users (userid, username, email, isadmin) VALUES (%s,%s,%s,%s)", (uid, first_name, email, False))
+            time_stamp = round(datetime.datetime.timestamp(datetime.datetime.now()))
+            new_user_query = db.run("INSERT INTO assurekit_users (userid, username, email, isadmin, created_on) VALUES (%s,%s,%s,%s,%s)", (uid, first_name, email,False,time_stamp))
             logging_in = auth.sign_in_with_email_and_password(email, password1)
             session['user'] = email
             flash('Account created!', category='success')

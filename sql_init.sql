@@ -5,4 +5,5 @@ CREATE TABLE public.assurekit_users (
   username character varying(250) NOT NULL,
   email character varying(100) NOT NULL,
   isadmin boolean NOT NULL,
+  created_on int NOT NULL
   );
