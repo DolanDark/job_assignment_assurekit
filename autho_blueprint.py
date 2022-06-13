@@ -37,9 +37,9 @@ def login():
                 flash('Logged in successfully!', category='success')
                 return redirect(url_for('data_blueprint.user_page'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash('Incorrect email/password, try again.', category='error')
         except:
-            flash('Incorrect password, try again.', category='error')
+            flash('Incorrect email/password, try again.', category='error')
     return render_template("login.html", user = "logging_in")
 
 
